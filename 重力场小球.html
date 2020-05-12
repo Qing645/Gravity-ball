@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        ul {
+            position: relative;
+            width: 10px;
+            height: 100px;
+            background-color: chartreuse;
+        }
+
+        ul .ele {
+            float: left;
+            width: 198px;
+            height: 98px;
+            border: 1px solid black;
+            background-color: rgb(0, 238, 255);
+            line-height: 98px;
+            text-align: center;
+        }
+
+        .bg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 100px;
+            opacity: 0.6;
+            background-color: violet;
+        } */
+        div {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            left: 0;
+            top: 0;
+            position: absolute;
+            background-color: aqua;
+            cursor: pointer;
+        }
+
+        /* 
+        span {
+            display: inline-block;
+            height: 16px;
+            width: 16px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -8px;
+            margin-top: -8px;
+
+            background-color: #69dede;
+            border-radius: 50%;
+            /* border: 1px solid black; */
+        /* } */
+    </style>
+</head>
+
+<body>
+    <!-- <ul>
+        <li class="ele">1</li>
+        <li class="ele">2</li>
+        <li class="ele">3</li>
+        <li class="ele">4</li>
+        <li class="bg"></li>
+    </ul> -->
+    <div>
+        <span></span>
+    </div>
+    <script>
+        var iDiv = document.getElementsByTagName('div')[0];
+
+        function startMove(dom, speedX, speedY) {
+            clearInterval(dom.timer);
+            var g = 3;
+            dom.timer = setInterval(function () {
+                speedY += g;
+                var newTop = dom.offsetTop + speedY,
+                    newLeft = dom.offsetLeft + speedX;
+                if (newTop >= document.documentElement.clientHeight - dom.clientHeight) {
+                    speedY *= -1;
+                    newTop = document.documentElement.clientHeight - dom.clientHeight;
+                    speedX *= 0.98;
+                    speedY *= 0.8;
+                }
+                if (newTop <= 0) {
+                    speedY *= -1;
+                    newTop = 0;
+                }
+                if (newLeft >= document.documentElement.clientWidth - dom.clientWidth) {
+                    speedX *= -1;
+                    newLeft = document.documentElement.clientWidth - dom.clientWidth;
+                    speedX *= 0.9;
+                    speedY *= 0.9;
+                }
+                if (newLeft <= 0) {
+                    speedX *= -1;
+                    newLeft = 0;
+                }
+                if (Math.abs(speedX) < 1 && Math.abs(speedY) < 2 && newTop == document.documentElement
+                    .clientHeight - dom.clientHeight) {
+                    speedX = 0;
+                    speedY = 0;
+                    clearInterval(dom.timer);
+                } else {
+                    dom.style.left = newLeft + 'px';
+                    dom.style.top = newTop + 'px';
+                }
+                console.log(
+                    speedX, speedY)
+            }, 30)
+        }
+        // 模拟重力场
+
+
+        // var ul = document.getElementsByTagName('ul')[0];
+        // ul.onmouseenter = function () { var timer = null;
+        //   console.log('a' + timer);
+        //     clearInterval(timer);
+        //     console.log('b' + timer);
+        //     timer = setInterval(function () {
+        //         var speed = 4;
+        //         ul.style.left = ul.offsetLeft + speed + 'px';
+        //     }, 1000)
+        // };
+        // var timer = null,
+        // speed = null;
+        // var ele = document.getElementsByTagName('li'),
+        //     bg = ele[ele.length - 1];
+
+        //     for(var i = 0; i < ele.length-1; i++){
+        //         ele[i].onmouseenter = function () {
+        //             startMove(bg,this.offsetLeft)
+        //             console.log(this.offsetLeft)
+        //         }
+        //     }
+
+        // function startMove(dom, target) {
+        //     clearInterval(timer);
+        //     timer = setInterval(function () {
+        //         if(Math.abs(target - dom.offsetLeft) < 1 && Math.abs(speed) < 1){
+        //             clearInterval(timer);
+        //         }else{
+        //            var a = ( target - dom.offsetLeft) / 5;
+        //            speed += a;
+        //            speed *= 0.8;
+        //            dom.style.left = dom.offsetLeft + speed + 'px';
+        //         }
+        //     }, 20);
+        // };
+
+
+        //   var ele = document.getElementsByTagName('li'),
+        //        bg = ele[ele.length - 1];
+
+        //        for(var i = 0; i < ele.length - 1; i++){
+        //            ele[i].onmouseenter = function () {
+        //                startMove(bg,this.offsetLeft);
+        //            }
+        //        }
+
+        //             // var timer = null;        
+        //             function startMove (dom,target) {
+        //             //    var timer = null;
+        //                 var a ,
+        //                 speed = null;
+        //                 console.log(dom.timer);
+        //                 clearInterval(dom.timer);
+        //                 dom.timer = setInterval(function(){
+        //                   if(Math.abs(speed) < 1 && Math.abs(target - dom.offsetLeft) < 1){
+        //                       clearInterval(dom.timer);
+        //                   }else{
+        //                       a = (target - dom.offsetLeft) / 5;
+        //                       speed += a;
+        //                       speed *= 0.8;
+        //                       dom.style.left = dom.offsetLeft + speed + 'px';
+        //                   }
+
+        //                 },20);
+
+        //             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //    function moTion(){
+        //        var speed = 0,
+        //           timer;    
+        //        var moTion_box = document.getElementById('aDiv');
+        //        clearInterval(timer);
+        //        moTion_box.timer = setInterval(function(){
+        //            console.log(moTion_box.offsetLeft);
+        //            if(moTion_box.offsetLeft == 1050){
+        //                clearInterval(moTion_box.timer);
+        //                console.log('d')
+        //            }else{
+        //             speed = speed + 5;
+        //             moTion_box.style.left = moTion_box.offsetLeft + speed +'px';
+        //            }
+
+        //        },30);
+        //    };
+        //    aDiv.onclick = function () {
+        //        moTion()
+        //    };
+
+
+        //         var iDiv = document.getElementsByTagName('div');
+        //         var timer = null;
+        // for(var i = 0; i < iDiv.length; i++) {
+        //     iDiv[i].onmouseenter = function(){
+        //         startMove(this,2000);
+        //     }
+        //     iDiv[i].onmouseleave = function () {
+        //         startMove(this,400);
+
+
+
+        //     }
+        // }
+
+        // 定时器随时改变位置，位置等于当前位置加固定值（速度值），速度值等于目标值减去物体变化位置
+        // （小数速度值要Math.floor()或Math.ceil()进行取整，并且速度值正负决定物体运动方向）
+        // 判断物体位置和目标位值相等时清除定时器。
+
+
+
+
+
+
+        // function startMove(dom, target) {
+        //     clearInterval(dom.timer);
+        //     var speed = null, iCur = null;
+        //     dom.timer = setInterval(function () {
+        //         iCur = parseFloat(getStyle(dom,'width'));
+        //         speed = (target - iCur) / 10;
+        //         speed = speed < 0 ? Math.floor(speed) : Math.ceil(speed);
+        //         if (iCur == target) {
+        //             clearInterval(dom.timer);
+        //         } else {
+        //             dom.style.width = iCur + speed + 'px';
+        //             console.log(iCur);
+        //         }
+        //     }, 30);
+        // }
+
+
+        // function getStyle(dom, attr) {
+        //     if (window.getComputedStyle) {
+        //         return window.getComputedStyle(dom, null)[attr];
+        //     } else {
+        //         return currentStyle[attr];
+        //     }
+        // }
+
+
+        // var aDiv = document.getElementById('aDiv'),
+        //     bDiv = document.getElementById('bDiv'),
+        //     cDiv = document.getElementById('cDiv');
+
+        // aDiv.onclick = function () {
+        //     startMove(this, {
+        //         width: 500,
+        //         height: 500,
+        //         left: 500,
+        //         top: 200
+        //     }, function () {
+        //         startMove(bDiv, {
+        //             width: 500,
+        //             height: 500,
+        //             borderRadius: 500,
+        //             left: 500,
+        //             top: 200
+        //         }, function () {
+        //             startMove(cDiv, {
+        //                 left: 698,
+        //                 borderRadius: 0,
+        //                 top: 398
+        //             })
+        //         })
+        //     })
+        // };
+        // bDiv.onclick = function () {
+        //     startMove(this, {
+        //         width: 500,
+        //         height: 500,
+        //         borderRadius: 500,
+        //         left: 500,
+        //         top: 200
+        //     })
+        // };
+        // cDiv.onclick = function () {
+        //     startMove(this, {
+        //         left: 698,
+        //         borderRadius: 0,
+        //         top: 398
+        //     })
+        // };
+        // function startMove(dom, attrObject, callBack) {
+        //     var iCur = null,
+        //         speed = null;
+        //     clearInterval(dom.timer);
+        //     dom.timer = setInterval(function () {
+        //         var iStop = true;
+        //         for (var attr in attrObject) {
+        //             if (attr == 'opacity') {
+        //                 iCur = parseFloat(getStyle(dom, attr)) * 100;
+        //             } else {
+        //                 iCur = parseInt(getStyle(dom, attr));
+        //             }
+        //             speed = (attrObject[attr] - iCur) / 10;
+        //             speed = speed < 0 ? Math.floor(speed) : Math.ceil(speed);
+        //             if (attr == 'opacity') {
+        //                 dom.style.opacity = (iCur + speed) / 100;
+        //             } else {
+        //                 dom.style[attr] = iCur + speed + 'px';
+        //             }
+        //             if (iCur != attrObject[attr]) {
+        //                 iStop = false;
+        //             }
+        //             if (iStop) {
+        //                 clearInterval(dom.timer);
+        //                 typeof (callBack) == "function" && callBack()
+        //             }
+
+        //         }
+        //     }, 30);
+        // }
+
+        iDiv.onmousedown = function (e) {
+            clearInterval(this.timer);
+            var event = window.event || e;
+            var disX = event.clientX - this.offsetLeft;
+            var disY = event.clientY - this.offsetTop;
+            var self = this;
+            var lastX = 0;
+            var lastY = 0;
+            var speedX = 0;
+            var speedY = 0;
+            document.onmousemove = function (e) {
+                var event = window.event || e;
+                var newTop = event.clientY - disY;
+                var newLeft = event.clientX - disX;
+                speedX = newLeft - lastX;
+                speedY = newTop - lastY;
+                lastX = newLeft;
+                lastY = newTop;
+                self.style.left = newLeft + 'px';
+                self.style.top = newTop + 'px';
+                console.log(newTop);
+            }
+            document.onmouseup = function () {
+                document.onmousemove = null;
+                document.onmouseup = null;
+                startMove(self, speedX, speedY);
+            }
+        }
+
+
+
+
+
+        // 轮播图： 利用运动函数进行窗口内水平移动，窗口外部分溢出隐藏，运动完成的图片利用回调函数进行循环。
+    </script>
+</body>
+
+</html>
